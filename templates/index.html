@@ -81,10 +81,13 @@
                                 <td>{{ rzad.suma }}</td>
                             </tr>
                         {% endfor %}
-                        <tr>
-                            {{ laczna_suma }}
-                        </tr>
                     </tbody>
+                    <h3>{{ laczna_suma }}</h3>
+                    <form action="/wyczysc" method="POST">
+                        <button class="btn-glow" type="submit" onclick="return confirm('Czy na pewno chcesz usunąć całą historię?');">
+                            Wyczyść całą historię
+                        </button>
+                    </form>
                 </table>
             {% else %}
                 <p class="pusta-baza">Brak zapisanych wpisów w historii.</p>
