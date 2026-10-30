@@ -7,15 +7,10 @@
 </head>
 <body>
     <h1>{{ tekst }}</h1>
-
-    <form action="/" method="post">
-        <input type="number" name="pierwsza" id="1">
-        <input type="number" name="druga" id="2">
-        <button type="submit">wyślij</button>
-    </form>
+    <h1>{{ szczegoly }}</h1>
     <h1>LIMITY</h1>
     <p>Miesięczny = 3604,50 zł | Kwartalny = 10813,50</p>
-    <form action="/" method="post">
+    <form class="formularz" action="/" method="post">
         <table>
             <tr>
                 <th>Nazwa</th>
@@ -53,5 +48,40 @@
         </table>
         <button type="submit">Dodaj</button>
     </form>
+    <h1>{{ wynik }}</h1>
+    <aside class="lista">
+        <h2>Historia zapisów</h2>
+        
+        {% if wiersze_tabeli %}
+            <table>
+                <tr>
+                    <th>Wpis</th>
+                    <th>Nazwa lekcji</th>
+                    <th>Ilość</th>
+                    <th>Suma wpisu</th>
+                </tr>
+                {% for rzad in wiersze_tabeli %}
+                    <tr>
+                        <td>{{ rzad.nr_wpisu }}</td>
+                        <td>{{ rzad.nazwa }}</td>
+                        <td>{{ rzad.ilosc }}</td>
+                        <td>{{ rzad.suma }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <!-- Wyświetlenie sumy całkowitej -->
+            <h3>Łączna suma: {{ laczna_suma }}</h3>
+
+            <!-- Przycisk do czyszczenia całej historii -->
+            <form action="/wyczysc" method="POST">
+                <button type="submit" onclick="return confirm('Czy na pewno chcesz usunąć całą historię?');">
+                    Wyczyść całą historię
+                </button>
+            </form>
+        {% else %}
+            <p>Brak historii w bazie.</p>
+        {% endif %}
+    </aside>
 </body>
 </html>
