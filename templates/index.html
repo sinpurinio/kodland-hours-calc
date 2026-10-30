@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ tekst }}</h1>
+
+    <form action="/" method="post">
+        <input type="number" name="pierwsza" id="1">
+        <input type="number" name="druga" id="2">
+        <button type="submit">wyślij</button>
+    </form>
+    <h1>LIMITY</h1>
+    <p>Miesięczny = 3604,50 zł | Kwartalny = 10813,50</p>
+    <form action="/" method="post">
+        <table>
+            <tr>
+                <th>Nazwa</th>
+                <th>Stawka (brutto)</th>
+                <th>Ilość</th>
+            </tr>
+            <tr>
+                <td>Lekcja indywidualna (30min)</td>
+                <td>28,50 zł</td> 
+                <td>
+                    <input type="number" name="lekcja_indywidualna" min="0" id="1">
+                </td>
+            </tr>
+            <tr>
+                <td>Lekcja 1-1 (50min)</td>
+                <td>39,00 zł</td> 
+                <td>
+                    <input type="number" name="lekcja_1_1" min="0" id="2">
+                </td>
+            </tr>
+            <tr>
+                <td>Zajęcia grupowe (60min)</td>
+                <td>52,00 zł</td>  
+                <td>
+                    <input type="number" name="zajecia_grupowe" min="0" id="3">
+                </td>
+            </tr>
+            <tr>
+                <td>Zajęcia grupowe (zaawansowane) (90min)</td>
+                <td>68,00 zł</td>
+                <td>
+                    <input type="number" name="zajecia_grupowe_zaawansowane" min="0" id="4">
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Dodaj</button>
+    </form>
+</body>
+</html>
