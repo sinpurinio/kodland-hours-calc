@@ -77,7 +77,7 @@ def kalkulator_godzin_kodland():
         "index.html",
         wynik=wynik,
         wiersze_tabeli=wiersze_tabeli,
-        laczna_suma=f"{laczna_suma:.2f} zł"
+        laczna_suma=f"Suma całkowita: {laczna_suma:.2f} zł"
     )
 
 

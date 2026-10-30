@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "szczegoly": {
+            "lekcja_indywidualna": 4
+        },
+        "suma": 114.0
+    },
+    {
+        "szczegoly": {
+            "lekcja_1_1": 3
+        },
+        "suma": 117.0
+    },
+    {
+        "szczegoly": {
+            "lekcja_1_1": 3
+        },
+        "suma": 117.0
+    },
+    {
+        "szczegoly": {
+            "zajecia_grupowe": 1
+        },
+        "suma": 52.0
+    }
+]

@@ -3,85 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kalkulator Godzin Kodland</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>{{ tekst }}</h1>
-    <h1>{{ szczegoly }}</h1>
-    <h1>LIMITY</h1>
-    <p>Miesięczny = 3604,50 zł | Kwartalny = 10813,50</p>
-    <form class="formularz" action="/" method="post">
-        <table>
-            <tr>
-                <th>Nazwa</th>
-                <th>Stawka (brutto)</th>
-                <th>Ilość</th>
-            </tr>
-            <tr>
-                <td>Lekcja indywidualna (30min)</td>
-                <td>28,50 zł</td> 
-                <td>
-                    <input type="number" name="lekcja_indywidualna" min="0" id="1">
-                </td>
-            </tr>
-            <tr>
-                <td>Lekcja 1-1 (50min)</td>
-                <td>39,00 zł</td> 
-                <td>
-                    <input type="number" name="lekcja_1_1" min="0" id="2">
-                </td>
-            </tr>
-            <tr>
-                <td>Zajęcia grupowe (60min)</td>
-                <td>52,00 zł</td>  
-                <td>
-                    <input type="number" name="zajecia_grupowe" min="0" id="3">
-                </td>
-            </tr>
-            <tr>
-                <td>Zajęcia grupowe (zaawansowane) (90min)</td>
-                <td>68,00 zł</td>
-                <td>
-                    <input type="number" name="zajecia_grupowe_zaawansowane" min="0" id="4">
-                </td>
-            </tr>
-        </table>
-        <button type="submit">Dodaj</button>
-    </form>
-    <h1>{{ wynik }}</h1>
-    <aside class="lista">
-        <h2>Historia zapisów</h2>
-        
-        {% if wiersze_tabeli %}
-            <table>
-                <tr>
-                    <th>Wpis</th>
-                    <th>Nazwa lekcji</th>
-                    <th>Ilość</th>
-                    <th>Suma wpisu</th>
-                </tr>
-                {% for rzad in wiersze_tabeli %}
-                    <tr>
-                        <td>{{ rzad.nr_wpisu }}</td>
-                        <td>{{ rzad.nazwa }}</td>
-                        <td>{{ rzad.ilosc }}</td>
-                        <td>{{ rzad.suma }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
 
-            <!-- Wyświetlenie sumy całkowitej -->
-            <h3>Łączna suma: {{ laczna_suma }}</h3>
+    <div class="app-container">
+        <!-- LEWA STRONA: FORMULARZ I WYNIK -->
+        <main class="lewa-sekcja">
+            <h1 class="glow-title">Kalkulator Przepracowanych Godzin</h1>
+            
+            <div class="limity-box">
+                <p><strong>Limity zarobków:</strong> Miesięczny: 3604,50 zł | Kwartalny: 10813,50 zł</p>
+            </div>
 
-            <!-- Przycisk do czyszczenia całej historii -->
-            <form action="/wyczysc" method="POST">
-                <button type="submit" onclick="return confirm('Czy na pewno chcesz usunąć całą historię?');">
-                    Wyczyść całą historię
-                </button>
+            <form class="formularz" action="/" method="post">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nazwa lekcji</th>
+                            <th>Stawka (brutto)</th>
+                            <th>Ilość</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lekcja indywidualna (30min)</td>
+                            <td>28,50 zł</td> 
+                            <td><input type="number" name="lekcja_indywidualna" min="0" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td>Lekcja 1-1 (50min)</td>
+                            <td>39,00 zł</td> 
+                            <td><input type="number" name="lekcja_1_1" min="0" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td>Zajęcia grupowe (60min)</td>
+                            <td>52,00 zł</td>  
+                            <td><input type="number" name="zajecia_grupowe" min="0" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td>Zajęcia grupowe (zaawansowane) (90min)</td>
+                            <td>68,00 zł</td>
+                            <td><input type="number" name="zajecia_grupowe_zaawansowane" min="0" value="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn-glow">Dodaj wpis</button>
             </form>
-        {% else %}
-            <p>Brak historii w bazie.</p>
-        {% endif %}
-    </aside>
+
+            {% if wynik %}
+                <div class="wynik-box">
+                    {{ wynik }}
+                </div>
+            {% endif %}
+        </main>
+
+        <!-- PRAWA STRONA: HISTORIA ZAPISÓW -->
+        <aside class="lista">
+            <h2>Historia zapisów</h2>
+            {% if wiersze_tabeli %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Wpis</th>
+                            <th>Nazwa lekcji</th>
+                            <th>Ilość</th>
+                            <th>Suma</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rzad in wiersze_tabeli %}
+                            <tr>
+                                <td>{{ rzad.nr_wpisu }}</td>
+                                <td>{{ rzad.nazwa }}</td>
+                                <td>{{ rzad.ilosc }}</td>
+                                <td>{{ rzad.suma }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            {{ laczna_suma }}
+                        </tr>
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="pusta-baza">Brak zapisanych wpisów w historii.</p>
+            {% endif %}
+        </aside>
+    </div>
+
 </body>
 </html>
